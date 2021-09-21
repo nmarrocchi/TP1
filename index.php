@@ -38,16 +38,15 @@ include "Class/User.php";
             <input type="submit" class='submit' name="Btn1" value='Login'>
             <input type="submit" class='submit' name="Btn2" value='Register'>
         </form>
-    <?php if(isset($_POST['Btn1'])){
-        $user = strip_tags($_POST['username']);
-        $passwd = strip_tags($_POST['password']);
-        $User->Connexion($user,$passwd);
-    }else{
-        echo "<p>&nbsp;</p>";
-    }
-    if(isset($_POST['Btn2'])){
-        $User->Inscription($_POST['username'], $_POST['password']);
-    }
-        ?>
+
+    <?php
+        if(isset($_POST['Btn1'])){
+            $User->Connexion($_POST['username'],$_POST['password']);
+        }
+
+        if(isset($_POST['Btn2'])){
+            $User->Inscription($_POST['username'], $_POST['password']);
+        }
+    ?>
     </body>
 </html>
