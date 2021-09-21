@@ -46,7 +46,7 @@ include "Class/User.php";
         echo "<p>&nbsp;</p>";
     }
     if(isset($_POST['Btn2'])){
-        $User->Inscription($user, $passwd);
+        $User->Inscription($_POST['username'], $_POST['password']);
     }
         ?>
     </body>
