@@ -75,7 +75,7 @@
             $IsAdmin = $BDD->query("SELECT `IsAdmin` FROM `user` WHERE `id` = '".$_SESSION['id']."' ");
             $IsAdmin = $IsAdmin->fetch();
 
-            echo $IsAdmin;
+            echo $IsAdmin['IsAdmin'];
 
             if($IsAdmin == 1){
                 echo 'admin';
