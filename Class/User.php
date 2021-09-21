@@ -76,7 +76,12 @@
             $isAdmin = $isAdmin->fetch();
             $isAdmin = $isAdmin['IsAdmin'];
 
-            return $isAdmin;
+            if($isAdmin == 1){
+                echo 'admin';
+              }
+              else[
+                echo 'not admin';
+              ]
         }
 
         public function afficheCoords(){

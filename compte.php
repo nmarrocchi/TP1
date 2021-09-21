@@ -34,12 +34,7 @@
 
     $user->afficheCoords();
 
-    if($user->admin() == 1){
-      echo 'admin';
-    }
-    else[
-      echo 'not admin';
-    ]
+    $user->admin();
 
 
       // - Bouton de déconnexion
