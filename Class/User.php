@@ -79,9 +79,9 @@
             if($isAdmin == 1){
                 echo 'admin';
               }
-              else[
+              else{
                 echo 'not admin';
-              ]
+              }
         }
 
         public function afficheCoords(){
