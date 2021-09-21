@@ -12,10 +12,6 @@
         public function __construct($bdd){
             $this->_bdd = $bdd;
         }
-
-        public function setIdUser($UserID){
-
-        }
        
         //Fonction qui permet de se connecter
         public function Connexion($user,$passwd){
@@ -47,25 +43,23 @@
                             <script> document.getElementById('ErrorValue').innerHTML = 'Le nom d\'utilisateur existe déja'</script> 
                         <?php
                     } 
+                    else if ($exist["COUNT(*)"] == 0){
+                        $this->_bdd->query("INSERT INTO user(user, passwd) VALUES('".$user."','".$passwd."')");
+                        print_r("INSERT INTO user(user, passwd) VALUES('".$user."','".$passwd."')");
+                        ?> 
+                            <script> document.getElementById('ErrorValue').innerHTML = 'Votre compte à été créé, veuillez vous connecter'</script> 
+                        <?php
+                    }
                     else {
-                        $insert = $this->_bdd->query("INSERT INTO user(user, passwd) VALUES('".$user."','".$passwd."')");
-                        
-                        if($insert->rowCount()>=1){
-                            ?> 
-                                <script> document.getElementById('ErrorValue').innerHTML = 'Votre compte à été créé, veuillez vous connecter'</script> 
-                            <?php
-                        }
-                        else {
-                            ?> 
-                                <script> document.getElementById('ErrorValue').innerHTML = 'Une erreur est survenue'</script> 
-                            <?php
-                        }
+                        ?> 
+                            <script> document.getElementById('ErrorValue').innerHTML = 'Une erreur est survenue'</script> 
+                        <?php
                     }
                 }
-                
-                else {}
 
-            }
+        }
+
+
             //Fonction se deconnecter de la session
         public function SeDeconnecter(){
             session_destroy();
@@ -75,7 +69,7 @@
         public function modifpassword($user,$passwd){
             
         }
-        //Fonction Accés page admin, modifier les users, supprimer users
+        //check si user admin
         public function admin($BDD){
             $IsAdmin = $BDD->query("SELECT `IsAdmin` FROM `user` WHERE `id` = '".$_SESSION['id']."' ");
             $IsAdmin = $IsAdmin->fetch();
