@@ -12,7 +12,4 @@
     }catch(Exception $e){
         $errorMessage .= $e->getMessage();
     }
-
-
-
 ?>

@@ -1,25 +1,5 @@
 <?php
 
-
-// Connexion
-function Autorisation($BDD){
-
-    if(isset($_POST['username'])){
-       
-        $Result = $BDD->query("SELECT * FROM `user` WHERE `user`='".$_POST['username']."' AND `passwd` = '".$_POST['passwd']."'");
-        if($Result->rowCount()>0){
-            $tab = $Result->fetch();
-            $_SESSION["Logged"] = true;
-            $_SESSION["ID_User"] = $tab['id'];
-            
-            return true;
-        }else{
-
-        }
-    }
-
-} 
-
 // - Retourne si user connecté ou non
 function check() {
     if ($_SESSION["Logged"] !== true) {
@@ -27,11 +7,6 @@ function check() {
     }else{
         return true;
     }
-}
-
-// - Déconnexion
-if(isset($_POST["Disconnect"])){
-    $_SESSION["Logged"] = false;
 }
 
 // - Suppression du compte
