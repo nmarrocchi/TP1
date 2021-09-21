@@ -33,12 +33,13 @@ function selectAllUsers($BDD){
 ?>
 
     <table class='User_List'>
-        <tr><td colspan="4">List Of Users</td></tr>
+        <tr><td colspan="5">List Of Users</td></tr>
         <tr>
             <td>ID</td>
             <td>Username</td>
             <td>Password</td>
             <td>IsAdmin</td>
+            <td></td>
         </tr>
 
 <?php
@@ -49,6 +50,7 @@ function selectAllUsers($BDD){
                 <td><?php echo $UsersList['user']?></td>
                 <td><?php echo $UsersList['passwd']?></td>
                 <td><?php echo $UsersList['IsAdmin']?></td>
+                <td><input type="checkbox" id="<?php echo $UsersList['user']?>">
             </tr>
         <?php
     }
