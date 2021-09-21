@@ -55,7 +55,7 @@
 
       if(isset($_POST['AdminPanel']))
       {
-        header("Location: AdminPanel.php")
+        header("Location: AdminPanel.php");
       }
       ?>
   </body>
