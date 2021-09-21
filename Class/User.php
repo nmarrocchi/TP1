@@ -73,6 +73,7 @@
         //Fonction Accés page admin, modifier les users, supprimer users
         public function admin($BDD){
             $IsAdmin = $BDD->query("SELECT `IsAdmin` FROM `user` WHERE `id` = '".$_SESSION['id']."' ");
+            print_r("SELECT `IsAdmin` FROM `user` WHERE `id` = '".$_SESSION['id']."' ");
             $IsAdmin = $IsAdmin->fetch();
 
             echo $IsAdmin['IsAdmin'];
