@@ -2,6 +2,7 @@
 
   include "session.php";
   include "Class/User.php";
+  include "functions.php";
 
   if (!isset($_SESSION['id'])){
     header("Location: index.php");
@@ -32,7 +33,7 @@
     
     <?php 
 
-    $user->afficheCoords();
+    afficheCoords();
 
     $user->admin();
 
