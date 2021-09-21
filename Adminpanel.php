@@ -11,7 +11,13 @@
   $user = new User($BDD);
 
       // - Check user is Admin
-      $user->admin($BDD);
+      if ($user->admin($BDD) == 0){
+        header("Location: compte.php");
+      }
+      else if( ($user->admin($BDD) != 0) && ($user->admin($BDD) != 1)  )
+      {
+        header("Location: index.php");
+      }
       
 
 ?>
@@ -22,7 +28,7 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" href="CSS/style.css" type="text/css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="CSS/compte.css">
+      <link rel="stylesheet" href="CSS/adminpanel.css">
       <title>Accueil</title>
   </head>
   <body>
@@ -48,6 +54,9 @@
       {
         header("location: compte.php");
       }
+
+      selectAllUsers($BDD);
+
       ?>
   </body>
 </html>
