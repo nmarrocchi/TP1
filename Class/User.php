@@ -75,5 +75,14 @@
             
         }
 
+        public function afficheCoords(){
+            $Coords = $this->_bdd->query("SELECT * FROM GPS");
+            $Coords = $Coords->fetch();
+
+            while($CoordsList = $Coords->fetch()){
+                ?><p>latitude : <?php echo $CoordsList['Latitude']?> / Longitude : <?php echo $CoordsList['Longitude'] ?> </p><?php
+            }
+        }
+
 }
 ?>
