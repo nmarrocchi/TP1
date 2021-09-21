@@ -35,7 +35,7 @@
 
     afficheCoords($BDD);
 
-    $user->admin();
+    $user->admin($BDD);
 
 
       // - Bouton de déconnexion
