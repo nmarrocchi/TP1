@@ -76,6 +76,7 @@
             $IsAdmin = $IsAdmin->fetch();
 
             echo $this->_user;
+            echo $_SESSION['id'];
 
             if($IsAdmin == 1){
                 echo 'admin';
