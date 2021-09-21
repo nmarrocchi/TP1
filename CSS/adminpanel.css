@@ -1,0 +1,19 @@
+*{
+   margin: 0%;
+   padding: 0%;
+}
+
+.User_List{
+   border: solid white 1px;
+   margin: auto;
+   text-align: center;
+}
+
+.User_List td{
+   padding: 1vh 1vw;
+}
+
+.userTab{
+   border-top: solid white 1px;
+   border-bottom: solid white 1px;
+}
