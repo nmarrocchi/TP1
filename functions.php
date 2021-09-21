@@ -10,15 +10,17 @@ function check() {
 }
 
 // - Suppression du compte
-if(isset($_POST["Delete_Account"])){
-    $_SESSION["Logged"] = false;
-    $Account_Delete = $BDD->query("DELETE FROM `user` WHERE id = '".$_SESSION["ID_User"]."'");
-    header("location: index.php");
+function DeleteAccount(){
+    if(isset($_POST["Delete_Account"])){
+        $_SESSION["Logged"] = false;
+        $Account_Delete = $BDD->query("DELETE FROM `user` WHERE id = '".$_SESSION["ID_User"]."'");
+        header("location: index.php");
+    }
 }
 
 // - Fonction Affiche Coordonnées
 function afficheCoords(){
-    $Coords = $User->_bdd->query("SELECT * FROM GPS");
+    $Coords = $BDD->query("SELECT * FROM GPS");
 ?>
     <table class="GPS_Coords">
 <?php
