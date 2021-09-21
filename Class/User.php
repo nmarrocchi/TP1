@@ -77,9 +77,18 @@
 
         public function afficheCoords(){
             $Coords = $this->_bdd->query("SELECT * FROM GPS");
+        ?>
+            <table class="GPS_Coords">
+        <?php
 
             while($CoordsList = $Coords->fetch()){
-                ?><p>latitude : <?php echo $CoordsList['Latitude']?> / Longitude : <?php echo $CoordsList['Longitude'] ?> </p><?php
+
+            ?>
+                <tr>
+                    <td>latitude : <?php echo $CoordsList['Latitude']?></td>
+                    <td>Longitude : <?php echo $CoordsList['Longitude'] ?></td>
+                </tr>
+            <?php
             }
         }
 
