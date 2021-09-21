@@ -10,3 +10,7 @@
 .GPS_Coords td{
     padding: 1vh 2vw;
 }
+
+input [type="submit"]{
+    width: 100%;
+}
