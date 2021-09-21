@@ -8,6 +8,10 @@ include "Class/User.php";
         header("Location: compte.php");
     }
 
+    if (!isset($ErrorValue)){
+        $ErrorValue = '';
+    }
+
     
 ?>
     
@@ -27,7 +31,7 @@ include "Class/User.php";
         <form action="" method="POST">
 
             <h3>Se connecter / S'inscrire</h3>
-            <!--<b class='ErrorValid'><?php //echo $ErrorValid ?></b>-->
+            <p id='ErrorValue'></p>
 
             <label><b>Nom d'utilisateur</b></label>
             <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>

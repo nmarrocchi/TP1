@@ -43,17 +43,22 @@
                     $exist = $exist->fetch();
 
                     if ($exist["COUNT(*)"] > 0) {
-
-
+                        ?> 
+                            <script> document.getElementById('ErrorValue').innerHTML = 'Le nom d\'utilisateur existe déja'</script> 
+                        <?php
                     } 
                     else {
                         $insert = $this->_bdd->query("INSERT INTO user(user, passwd) VALUES('".$user."','".$passwd."')");
                         
                         if($insert->rowCount()>=1){
-                            echo'Votre compte à été créé, veuillez vous connecter';
+                            ?> 
+                                <script> document.getElementById('ErrorValue').innerHTML = 'Votre compte à été créé, veuillez vous connecter'</script> 
+                            <?php
                         }
                         else {
-                            echo "Une erreur est survenue";
+                            ?> 
+                                <script> document.getElementById('ErrorValue').innerHTML = 'Une erreur est survenue'</script> 
+                            <?php
                         }
                     }
                 }
@@ -74,7 +79,7 @@
         public function admin($BDD){
             $IsAdmin = $BDD->query("SELECT `IsAdmin` FROM `user` WHERE `id` = '".$_SESSION['id']."' ");
             $IsAdmin = $IsAdmin->fetch();
-
+            $this->_admin = $IsAdmin['IsAdmin'];
             return $IsAdmin['IsAdmin'];
 
         }

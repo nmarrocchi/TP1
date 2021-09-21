@@ -4,14 +4,29 @@
 }
 
 html{
-    background-color: #53af57;
+    background-color: rgb(61, 60, 60);
+    color: white;
+}
+
+#ErrorValue{
+    display: block;
+    margin: 1vh auto;
+    color: rgb(221, 0, 0);
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: rgb(151, 0, 0) 1px 1px;
+    text-align: center;
 }
 
 form{
-    background-color: white;
-    width: max-content;
-    margin: 8vh auto;
+    background-color: rgb(36, 35, 35);
+    min-width: max-content;
+    width: 30%;
+    margin: 20vh auto;
     padding: 5vh 8vh;
+    border: double white 2px;
+    border-radius: 20px;
+    color: white;
 }
 
 form h3, form input, form b, form label{
@@ -20,6 +35,12 @@ form h3, form input, form b, form label{
     margin: 1vh auto 2vh auto;
 }
 
+form input{
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: 1vh 1vw;
+}
+
 form input[type='submit']{
-    width: 50%;
+    width: max-content;
 }

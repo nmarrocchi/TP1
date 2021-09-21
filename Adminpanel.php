@@ -31,21 +31,12 @@
 
       <form action="" method="post">
         <input type="submit" name="déco" value="Déconnexion">
-        <?php
-          if($user->admin($BDD) == 1){
-            ?>
-              <input type="submit" name="AdminPanel" value="Panel Administrateur">
-            <?php
-          }
-        ?>
-
+        <input type="submit" name="=Coords" value="Coordonnées">
       </form>
 
     </div>
     
     <?php 
-      // - Affiche Coords
-      afficheCoords($BDD);
 
       // - Bouton de déconnexion
       if(isset($_POST['déco']))
@@ -53,9 +44,9 @@
         $user->SeDeconnecter();
       }
 
-      if(isset($_POST['AdminPanel']))
+      if(isset($_POST['Coords']))
       {
-        header("Location: AdminPanel.php")
+        header("location: compte.php");
       }
       ?>
   </body>
