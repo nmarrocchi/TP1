@@ -18,7 +18,7 @@ if(isset($_POST["Delete_Account"])){
 
 // - Fonction Affiche Coordonnées
 function afficheCoords(){
-    $Coords = $this->_bdd->query("SELECT * FROM GPS");
+    $Coords = $BDD->query("SELECT * FROM GPS");
 ?>
     <table class="GPS_Coords">
 <?php
