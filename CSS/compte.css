@@ -3,3 +3,10 @@
     padding: 0%;
 }
 
+.GPS_Coords{
+    margin: auto;
+}
+
+.GPS_Coords td{
+    padding: 1vh 2vw;
+}
