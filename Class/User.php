@@ -77,13 +77,6 @@
 
             echo $IsAdmin['IsAdmin'];
 
-            if($IsAdmin == 1){
-                echo 'admin';
-              }
-              else{
-                echo 'not admin';
-              }
-
         }
 
 }
