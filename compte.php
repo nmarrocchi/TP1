@@ -24,7 +24,7 @@
     <div class="Contenu">
 
       <form action="" method="post">
-        <input type="submit" name="déco">
+        <input type="submit" name="déco" value="Déconnexion">
       </form>
 
     </div>
