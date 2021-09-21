@@ -7,13 +7,10 @@
    border: solid white 1px;
    margin: auto;
    text-align: center;
+   border-collapse: collapse;
 }
 
 .User_List td{
    padding: 1vh 1vw;
-}
-
-.userTab{
    border-top: solid white 1px;
-   border-bottom: solid white 1px;
 }
