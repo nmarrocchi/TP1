@@ -71,9 +71,9 @@
             
         }
         //Fonction Accés page admin, modifier les users, supprimer users
-        public function admin(){
-            $IsAdmin = $this->_bdd->query("SELECT * FROM user WHERE 'username' = '"$this->_user"' ");
-            print_r("SELECT * FROM user WHERE 'username' = '"$this->_user"' ");
+        public function admin($user){
+            $IsAdmin = $this->_bdd->query("SELECT * FROM user WHERE 'username' = '"$user"' ");
+            print_r("SELECT * FROM user WHERE 'username' = '"$user"' ");
 
         }
 
