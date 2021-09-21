@@ -19,7 +19,7 @@ function DeleteAccount(){
 }
 
 // - Fonction Affiche Coordonnées
-function afficheCoords(){
+function afficheCoords($BDD){
     $Coords = $BDD->query("SELECT * FROM GPS");
 ?>
     <table class="GPS_Coords">

@@ -33,7 +33,7 @@
     
     <?php 
 
-    afficheCoords();
+    afficheCoords($BDD);
 
     $user->admin();
 
