@@ -9,15 +9,6 @@ function check() {
     }
 }
 
-// - Suppression du compte
-function DeleteAccount(){
-    if(isset($_POST["Delete_Account"])){
-        $_SESSION["Logged"] = false;
-        $Account_Delete = $BDD->query("DELETE FROM `user` WHERE id = '".$_SESSION["ID_User"]."'");
-        header("location: index.php");
-    }
-}
-
 // - Fonction Affiche Coordonnées
 function afficheCoords($BDD){
     $Coords = $BDD->query("SELECT * FROM GPS");
@@ -35,3 +26,31 @@ function afficheCoords($BDD){
     <?php
     }
 }
+
+// - Select All of user in bdd
+function selectAllUsers($BDD){
+    $Users = $BDD->query("SELECT * FROM user");
+?>
+
+    <table class='User_List'>
+        <tr><td colspan="4">List Of Users</td></tr>
+        <tr>
+            <td>ID</td>
+            <td>Username</td>
+            <td>Password</td>
+            <td>IsAdmin</td>
+        </tr>
+
+<?php
+    while($UsersList = $Users->fetch()){
+        ?>
+            <tr class="userTab" id="<?php echo $UsersList['user']?>">
+                <td><?php echo $UsersList['id']?></td>
+                <td><?php echo $UsersList['user']?></td>
+                <td><?php echo $UsersList['passwd']?></td>
+                <td><?php echo $UsersList['IsAdmin']?></td>
+            </tr>
+        <?php
+    }
+}
+?>
