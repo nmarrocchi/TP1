@@ -34,7 +34,7 @@
 
     $user->afficheCoords();
 
-    $user->admin($_SESSION['id']);
+    $user->admin();
 
 
       // - Bouton de déconnexion
