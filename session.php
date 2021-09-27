@@ -1,15 +1,22 @@
 <?php
     session_start();
     // - Gestion de la bdd
-    $BDD = null;
-    $access = null;
-    $errorMessage="";
+    $host = "192.168.64.204";
+    $dbname = "tp1";
+    $login = "root";
+    $mdp = "";
 
-    try{
-        $user = "admin";
-        $pass = "admin";
-        $BDD = new PDO('mysql:host=192.168.64.204;dbname=TP1', $user, $pass);
-    }catch(Exception $e){
-        $errorMessage .= $e->getMessage();
+    $bdd = new PDO('mysql:host='.$host.'; dbname='.$dbname.'; charset=utf8', $login, $mdp);
+
+    $user = new user($bdd);
+
+    $fonction = new fonction($bdd);
+
+    if (isset($_SESSION["Connected"]) && $_SESSION["Connected"] == true){
+        if(isset($_SESSION["userID"])){
+            $user->setUserByID($_SESSION["userID"]);
+        }
+    }else{
+        $user->connexion();
     }
 ?>

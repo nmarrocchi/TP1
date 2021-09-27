@@ -1,18 +1,9 @@
 <?php
+
+session_start();
 include "session.php";
-include "Class/User.php";
 
-    $User = new User($BDD);
-
-    if (isset($_SESSION['id'])){
-        header("Location: compte.php");
-    }
-
-    if (!isset($ErrorValue)){
-        $ErrorValue = '';
-    }
-
-    
+if($_SESSION["Connected"] == true){
 ?>
     
 <!DOCTYPE html>
@@ -24,33 +15,8 @@ include "Class/User.php";
         <title>Accueil</title>
     </head>
     <body>
-        <?php
-        
-        ?>
-
-        <form action="" method="POST">
-
-            <h3>Se connecter / S'inscrire</h3>
-            <p id='ErrorValue'></p>
-
-            <label><b>Nom d'utilisateur</b></label>
-            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
-
-            <label><b>Mot de passe</b></label>
-            <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-
-            <input type="submit" class='submit' name="Btn1" value='Login'>
-            <input type="submit" class='submit' name="Btn2" value='Register'>
-        </form>
-
-    <?php
-        if(isset($_POST['Btn1'])){
-            $User->Connexion($_POST['username'],$_POST['password']);
-        }
-
-        if(isset($_POST['Btn2'])){
-            $User->Inscription($_POST['username'], $_POST['password']);
-        }
-    ?>
     </body>
 </html>
+<?php
+}
+?>
