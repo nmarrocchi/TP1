@@ -1,5 +1,5 @@
 <?php
-    class User{
+    class user{
 
         // - Propriétés
         private $_id;
@@ -7,6 +7,7 @@
         private $_passwd;
         private $_admin;
         private $_bdd;
+        private $_req;
 
         // - Méthodes
         public function __construct($bdd){
@@ -14,19 +15,19 @@
         }
 
         // Initialisation des variables
-        public function setUser($id, $login, $_passwd, $admin){
+        public function setUser($id, $user, $_passwd, $admin){
             $this->_id = $id;
-            $this->_login = $login;
+            $this->_user = $user;
             $this->_passwd = $_passwd;
             $this->_admin = $admin;
         }
 
         // Permet de récupérer les données de l'utilisateur en BDD
         public function setUserByID($id){
-            $req = "SELECT * FROM `user` WHERE `userID`='".$id."'";
+            $req = "SELECT * FROM `user` WHERE `id`='".$id."'";
             $Result = $this->_bdd->query($req);
             while($tab = $Result->fetch()){
-                $this->setUser($tab["userID"], $tab["login"], $tab["passwd"], $tab["admin"]);
+                $this->setUser($tab["id"], $tab["user"], $tab["passwd"], $tab["admin"]);
             }
         }
 
@@ -35,9 +36,9 @@
             return $this->_id;
         }
 
-        // Retour de la variable $_login
-        public function getLogin(){
-            return $this->_login;
+        // Retour de la variable $_user
+        public function getuser(){
+            return $this->_user;
         }
 
         // Retour de la variable $_admin
@@ -51,20 +52,20 @@
             $error1 = false;
             $error2 = false;
             $_SESSION["Connected"] = false;
-            if(isset($_POST["login"]) && isset($_POST["passwd"]) && isset($_POST["conf-passwd"])){
+            if(isset($_POST["user"]) && isset($_POST["passwd"]) && isset($_POST["conf-passwd"])){
                 if($_POST["passwd"] == $_POST["conf-passwd"]){
-                    $this->_req = "SELECT COUNT(*) FROM `user` WHERE `login`='".$_POST['login']."' AND `passwd` = '".$_POST['passwd']."'";
+                    $this->_req = "SELECT COUNT(*) FROM `user` WHERE `user`='".$_POST['user']."' AND `passwd` = '".$_POST['passwd']."'";
                     $Result = $this->_bdd->query($this->_req);
                     $nbr = $Result->fetch();
                     if($nbr['COUNT(*)'] == 0){
-                        $login = $_POST['login']; $passwd = $_POST['passwd']; $admin = 0;
-                        $this->_req = "INSERT INTO `user`(`login`, `passwd`, `admin`) VALUES('$login', '$passwd', '$admin')";
+                        $user = $_POST['user']; $passwd = $_POST['passwd']; $admin = 0;
+                        $this->_req = "INSERT INTO `user`(`user`, `passwd`, `admin`) VALUES('$user', '$passwd', '$admin')";
                         $Result = $this->_bdd->query($this->_req);
-                        $this->_req = "SELECT * FROM `user` WHERE `login`='".$_POST['login']."' AND `passwd` = '".$_POST['passwd']."'";
+                        $this->_req = "SELECT * FROM `user` WHERE `user`='".$_POST['user']."' AND `passwd` = '".$_POST['passwd']."'";
                         $Result = $this->_bdd->query($this->_req);
                         if($tab = $Result->fetch()){
-                            $this->setUserByID($tab["userID"]);
-                            $_SESSION["userID"] = $tab["userID"];
+                            $this->setUserByID($tab["id"]);
+                            $_SESSION["id"] = $tab["id"];
                             $_SESSION["Connected"] = true;
                             $afficheForm = false;
                             header("location: index.php");
@@ -91,7 +92,7 @@
                     </head>
                     <body>
                         <div class="back">
-                            <div class="form-login">
+                            <div class="form-user">
                                 <h2>Inscription</h2>
                                 <form method="post">
                                     <?php
@@ -102,8 +103,8 @@
                                             ?><div class="erreur">Compte déjà existant</div><?php
                                         }
                                     ?>
-                                    <div class="login">
-                                        <input type="text" id="login" name="login" class="login-input" placeholder="Votre login" autocomplete="off" autocapitalize="off" required></input>
+                                    <div class="user">
+                                        <input type="text" id="user" name="user" class="user-input" placeholder="Votre user" autocomplete="off" autocapitalize="off" required></input>
                                     </div>
                                     <div class="passwd">
                                         <input type="password" id="passwd" name="passwd" class="passwd-input" placeholder="Votre mot de passe" autocomplete="off" autocapitalize="off" required></input>
@@ -128,12 +129,12 @@
             $afficheForm = true;
             $error = false;
             $_SESSION["Connected"] = false;
-            if(isset($_POST["login"]) && isset($_POST["passwd"])){
-                $this->_req = "SELECT * FROM `user` WHERE `login`='".$_POST['login']."' AND `passwd` = '".$_POST['passwd']."'";
+            if(isset($_POST["user"]) && isset($_POST["passwd"])){
+                $this->_req = "SELECT * FROM `user` WHERE `user`='".$_POST['user']."' AND `passwd` = '".$_POST['passwd']."'";
                 $Result = $this->_bdd->query($this->_req);
                 if($tab = $Result->fetch()){
-                    $this->setUserByID($tab["userID"]);
-                    $_SESSION["userID"] = $tab["userID"];
+                    $this->setUserByID($tab["id"]);
+                    $_SESSION["id"] = $tab["id"];
                     $_SESSION["Connected"] = true;
                     $afficheForm = false;
                 }else{
@@ -156,16 +157,16 @@
                     </head>
                     <body>
                         <div class="back">
-                            <div class="form-login">
+                            <div class="form-user">
                                 <h2>Connexion</h2>
                                 <form method="post">
                                     <?php
                                         if($error == true){
-                                            ?><div class="erreur">Login ou mot de passe invalide</div><?php
+                                            ?><div class="erreur">user ou mot de passe invalide</div><?php
                                         }
                                     ?>
-                                    <div class="login">
-                                        <input type="text" id="login" name="login" class="login-input" placeholder="Votre login" autocomplete="off" autocapitalize="off" required></input>
+                                    <div class="user">
+                                        <input type="text" id="user" name="user" class="user-input" placeholder="Votre user" autocomplete="off" autocapitalize="off" required></input>
                                     </div>
                                     <div class="passwd">
                                         <input type="password" id="passwd" name="passwd" class="passwd-input" placeholder="Votre mot de passe" autocomplete="off" autocapitalize="off" required></input>
