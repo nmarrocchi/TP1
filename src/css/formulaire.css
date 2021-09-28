@@ -1,0 +1,48 @@
+.form-user{
+    background-color: rgb(35, 35, 35);
+    min-width: max-content;
+    width: 30%;
+    margin: 20vh auto;
+    padding: 5vh 8vh;
+    border: double white 2px;
+    border-radius: 20px;
+    color: white;
+}
+
+form h2, form input, form b, form label{
+    text-align: center;
+    display: block;
+    margin: 1vh auto 2vh auto;
+}
+
+form input{
+    width: 50%;
+    border: 1px solid;
+    border-color: black;
+    border-radius: 10px;
+    padding: 1vh 1vw;
+}
+
+form input[type='submit']{
+    width: max-content;
+}
+
+form input[type='submit']:hover {
+    color: white;
+    border-color: white;
+    background-color: rgb(50, 50, 50);
+    cursor: pointer;
+}
+
+.erreur {
+    text-align: center;
+    color: rgb(180, 0, 0);
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: white;
+}

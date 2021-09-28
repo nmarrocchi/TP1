@@ -1,62 +1,49 @@
-<?php
-
-  include "session.php";
-  include "Class/User.php";
-  include "functions.php";
-
-  if (!isset($_SESSION['id'])){
-    header("Location: index.php");
-  }
-
-  $user = new User($BDD);
-
-      // - Check user is Admin
-      $user->admin($BDD);
-      
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-      <meta charset="UTF-8">
-      <link rel="stylesheet" href="CSS/style.css" type="text/css">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="CSS/compte.css">
-      <title>Accueil</title>
-  </head>
-  <body>
-
-    <div class="Contenu">
-
-      <form action="" method="post">
-        <input type="submit" name="déco" value="Déconnexion">
-        <?php
-          if($user->admin($BDD) == 1){
-            ?>
-              <input type="submit" name="AdminPanel" value="Panel Administrateur">
-            <?php
-          }
-        ?>
-
-      </form>
-
-    </div>
+<?php
     
-    <?php 
-      // - Affiche Coords
-      afficheCoords($BDD);
+    session_start();   // Ouverture de la session
+    include("session.php"); // Appel de la page de session 
 
-      // - Bouton de déconnexion
-      if(isset($_POST['déco']))
-      {
-        $user->SeDeconnecter();
-      }
+    if(isset($_POST['save'])){
+        $user->updateUser($id);
+        header("Refresh:0");
+    }
+    if(isset($_POST['suppr_confirm'])){
+        $user->deleteUser($id);
+        header('location: index.php');
+    }
 
-      if(isset($_POST['AdminPanel']))
-      {
-        header("Location: AdminPanel.php");
-      }
-      ?>
-  </body>
+    if($_SESSION["Connected"] == true){
+        ?>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Compte</title>
+            <link rel="icon" type="image/png" href="src/img/icon.png">
+            <link rel='stylesheet' type='text/css' href='src/css/style.css'>
+            <link rel='stylesheet' type='text/css' href='src/css/compte.css'>
+            <link rel='stylesheet' type='text/css' href='src/css/formulaire.css'>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+        </head>
+        <body>
+            <?php
+                include("menu.php");
+            ?>
+            <div class="back">
+                <h2>Compte</h2>
+                <?php $id = $user->getID(); ?>
+                <div class="divegg">
+                    <a href="https://www.youtube.com/watch?v=Tj63xbpKnqo"><img src="src/img/egg.jfif" class="egg"></a>
+                </div>
+                <div class="form">
+                    <h4>Modifier le compte</h4>
+                    <?php $user->formUser($id); ?>
+                </div>
+            </div>
+            <script type="text/javascript" src="src/js/edit.js"></script>
+        </body> 
+    <?php
+    }
+?>            
 </html>

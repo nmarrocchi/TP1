@@ -1,5 +1,6 @@
 <?php
     include "src/class/user.php";
+    include "src/class/bateau.php";
 
     /*$host = "127.0.0.1";
     $dbname = "tp2";
@@ -8,7 +9,7 @@
 
     // - Gestion de la bdd
     $host = "192.168.64.204";
-    $dbname = "tp1";
+    $dbname = "Lawrence";
     $login = "admin";
     $mdp = "admin";
 
@@ -16,13 +17,15 @@
 
     $user = new user($bdd);
 
-    //$fonction = new fonction($bdd);
+    //$bateau = new bateau($bdd);
 
-    if (isset($_SESSION["Connected"]) && $_SESSION["Connected"] == true){
-        if(isset($_SESSION["userID"])){
-            $user->setUserByID($_SESSION["userID"]);
+    if($_SERVER['PHP_SELF'] != "/TP2/inscription.php"){
+        if (isset($_SESSION["Connected"]) && $_SESSION["Connected"] == true){
+            if(isset($_SESSION["_ID"])){
+                $user->setUserByID($_SESSION["_ID"]);
+            }
+        }else{
+            $user->connexion();
         }
-    }else{
-        $user->connexion();
     }
 ?>
