@@ -183,12 +183,140 @@
             } 
         }
 
-            //Fonction se deconnecter de la session
+        //Fonction se deconnecter de la session
         public function deconnexion(){
             session_unset();
             session_destroy();
             unset($_POST);
             echo '<meta http-equiv="refresh" content="0">';
+        }
+
+        // Affiche les données (id, login, admin) de l'utilisateur
+        public function selectUser(){
+            $this->_req = "SELECT `id`, `login`, `admin` FROM `users` WHERE 1";
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Login</td>
+                            <td>Admin</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            while($tab = $Result->fetch()){
+                                ?>
+                                    <tr id="<?= $tab['id'] ?>">
+                                        <td>
+                                            <div>
+                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>"><?= $tab['id'] ?></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>"><?= $tab['login'] ?></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>">
+                                                    <?php
+                                                        if($tab['admin'] == 0){
+                                                            echo "Non";
+                                                        }else{
+                                                            echo "Oui";
+                                                        }
+                                                    ?>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            <?php
+        }
+
+        // Permet d'ajouter un utilisateur en BDD
+        public function insertUser(){
+            ?>
+                <form method="post">
+                    <div class="account">
+                        <label>Login : </label>
+                        <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
+                        <label>Mot de passe : </label>
+                        <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
+                    </div>
+                    <div class="admin">
+                        <label>Administrateur : </label>
+                        <select name="admin" class="form-input" required>
+                            <option value=""></option>
+                            <option value="1">Oui</option>
+                            <option value="0">Non</option>
+                        </select>
+                    </div>
+                    <div class="submit-button">
+                        <input type="submit" name="submit" class="button" value="Ajouter">
+                    </div>
+                </form>
+            <?php
+            if(isset($_POST['submit'])){
+                $login = $_POST['login']; $mdp = $_POST['mdp']; $admin = $_POST['admin'];
+                $this->_req = "INSERT INTO `user`(`login`, `mdp`, `admin`) VALUES('$login', '$mdp', '$admin')";
+                $this->_bdd->query($this->_req);
+                unset($_POST);
+            }
+        }
+
+        // Formulaire pour la modification et la suppression d'un utilisateur
+        public function formUser($id){
+            $this->_req = "SELECT `login`, `password`, `admin` FROM `users` WHERE `id` = '".$id."'";
+            $Result = $this->_bdd->query($this->_req);
+            if ( $tab = $Result->fetch() ){
+                ?>
+                    <form method="post">
+                        <div class="account">
+                            <label>Login : </label>
+                            <input type="text" class="form-input" id="login" name="login" value="<?= $tab['login'] ?>" required>
+                            <label>Mot de passe : </label>
+                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['password'] ?>" required>
+                        </div>
+                        <div class="admin">
+                            <label>Administrateur : </label>
+                            <select class="form-input" id="admin" name="admin" required>
+                                <?php
+                                    if($tab['admin'] == 1){
+                                        ?>
+                                            <option value="<?= $tab['admin'] ?>">Oui</option>
+                                            <option value="0">Non</option>
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                            <option value="<?= $tab['admin'] ?>">Non</option>
+                                            <option value="1">Oui</option>
+                                        <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="submit-button">
+                            <input type="submit" id="save" name="save" class="button" value="Enregistrer">
+                            <input type="submit" id="suppr_confirm" name="suppr_confirm" class="button" value="Supprimer définitivement">
+                            <input type="button" id="suppr" name="suppr" class="button" value="Supprimer">
+                            <input type="button" id="cancel" name="cancel" class="button" value="Annuler">
+                        </div>
+                        </form>
+                    </form>
+                <?php
+            }
+            else{
+                echo "No user found";
+            }
         }
     }
 ?>
