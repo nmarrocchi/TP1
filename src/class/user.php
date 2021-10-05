@@ -274,44 +274,46 @@
 
         // Formulaire pour la modification et la suppression d'un utilisateur
         public function formUser($id){
+
             $this->_req = "SELECT `login`, `password`, `admin` FROM `users` WHERE `id` = '".$id."'";
             $Result = $this->_bdd->query($this->_req);
             if ( $tab = $Result->fetch() ){
                 ?>
-                    <form method="post">
-                        <div class="account">
-                            <label>Login : </label>
-                            <input type="text" class="form-input" id="login" name="login" value="<?= $tab['login'] ?>" required>
-                            <label>Mot de passe : </label>
-                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['password'] ?>" required>
-                        </div>
-                        <div class="admin">
-                            <label>Administrateur : </label>
-                            <select class="form-input" id="admin" name="admin" required>
-                                <?php
-                                    if($tab['admin'] == 1){
-                                        ?>
-                                            <option value="<?= $tab['admin'] ?>">Oui</option>
-                                            <option value="0">Non</option>
-                                        <?php
-                                    }
-                                    else{
-                                        ?>
-                                            <option value="<?= $tab['admin'] ?>">Non</option>
-                                            <option value="1">Oui</option>
-                                        <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="submit-button">
-                            <input type="submit" id="save" name="save" class="button" value="Enregistrer">
-                            <input type="submit" id="suppr_confirm" name="suppr_confirm" class="button" value="Supprimer définitivement">
-                            <input type="button" id="suppr" name="suppr" class="button" value="Supprimer">
-                            <input type="button" id="cancel" name="cancel" class="button" value="Annuler">
-                        </div>
+                    <div class="form-user">
+                        <form method="post">
+                            <div class="account">
+                                <label>Login : </label>
+                                <input type="text" class="form-input" id="login" name="login" value="<?= $tab['login'] ?>" required>
+                                <label>Mot de passe : </label>
+                                <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['password'] ?>" required>
+                            </div>
+                            <div class="admin">
+                                <label>Administrateur : </label>
+                                <select class="form-input" id="admin" name="admin" required>
+                                    <?php
+                                        if($tab['admin'] == 1){
+                                            ?>
+                                                <option value="<?= $tab['admin'] ?>">Oui</option>
+                                                <option value="0">Non</option>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <option value="<?= $tab['admin'] ?>">Non</option>
+                                                <option value="1">Oui</option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="submit-button">
+                                <input type="submit" id="save" name="save" class="button" value="Enregistrer">
+                                <input type="submit" id="suppr_confirm" name="suppr_confirm" class="button" value="Supprimer définitivement">
+                                <input type="button" id="suppr" name="suppr" class="button" value="Supprimer">
+                                <input type="button" id="cancel" name="cancel" class="button" value="Annuler">
+                            </div>
                         </form>
-                    </form>
+                    </div>
                 <?php
             }
             else{

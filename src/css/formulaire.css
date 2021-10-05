@@ -9,13 +9,12 @@
     color: white;
 }
 
-form h2, form input, form b, form label{
+form h2, form input, form select, form b, form label{
     text-align: center;
-    display: block;
     margin: 1vh auto 2vh auto;
 }
 
-form input{
+form input, form select{
     width: 50%;
     border: 1px solid;
     border-color: black;
