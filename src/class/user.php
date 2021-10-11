@@ -31,7 +31,7 @@
             }
         }
 
-        // Retour de la variable $__ID 
+        // Retour de la variable $_ID 
         public function getID(){
             return $this->_id;
         }

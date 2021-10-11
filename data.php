@@ -22,7 +22,7 @@
             <div class="back">
                 <h2>Data</h2>
                 <div class="datatable">
-                    <?php //$bateau->selectData(); ?>
+                    <?php $boat->selectData(); ?>
                 </div>
             </div>
         </body> 
