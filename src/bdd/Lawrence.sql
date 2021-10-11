@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 05 oct. 2021 à 03:41
+-- Généré le : lun. 11 oct. 2021 à 07:13
 -- Version du serveur :  10.3.29-MariaDB-0+deb10u1
 -- Version de PHP : 7.3.27-1~deb10u1
 
@@ -28,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `boats` (
-  `_ID` int(11) NOT NULL,
-  `Name` varchar(30) NOT NULL,
-  `Color` varchar(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL,
+  `name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `color` varchar(30) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `boats`
 --
 
-INSERT INTO `boats` (`_ID`, `Name`, `Color`) VALUES
+INSERT INTO `boats` (`id`, `name`, `color`) VALUES
 (1, 'Concordia', '#0000ff'),
 (2, 'Salut', '#00ff00'),
 (3, 'LeBoDoggo', '#e1e114');
@@ -49,45 +49,19 @@ INSERT INTO `boats` (`_ID`, `Name`, `Color`) VALUES
 --
 
 CREATE TABLE `pins` (
-  `_ID` int(11) NOT NULL,
-  `x` float NOT NULL,
-  `y` float NOT NULL,
-  `name` varchar(30) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL,
+  `idBoat` int(11) NOT NULL,
+  `longitude` float NOT NULL,
+  `latitude` float NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `pins`
 --
 
-INSERT INTO `pins` (`_ID`, `x`, `y`, `name`) VALUES
-(7, 49.8438, 1.22501, 'Meulers, Chez le Big Doggo'),
-(5, 49.8774, 2.30134, 'Lapro');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `traces`
---
-
-CREATE TABLE `traces` (
-  `_ID` int(11) NOT NULL,
-  `_IDboat` varchar(30) NOT NULL,
-  `x` float NOT NULL,
-  `y` float NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `traces`
---
-
-INSERT INTO `traces` (`_ID`, `_IDboat`, `x`, `y`, `timestamp`) VALUES
-(1, '1', 49.8769, 2.30471, '2021-09-20 14:23:31'),
-(2, '1', 49.8652, 2.31724, '2021-09-20 14:23:31'),
-(23, '2', 38, 21, '2021-09-21 14:23:31'),
-(24, '2', 40, 25, '2021-09-21 14:23:31'),
-(25, '2', 40, 30, '2021-09-21 14:23:31'),
-(26, '2', 50, 80, '2021-09-21 14:23:31');
+INSERT INTO `pins` (`id`, `idBoat`, `longitude`, `latitude`, `date`) VALUES
+(8, 1, 4.36952, 3.21475, '2021-10-11 05:10:14');
 
 -- --------------------------------------------------------
 
@@ -110,7 +84,8 @@ INSERT INTO `users` (`id`, `login`, `password`, `admin`) VALUES
 (13, '1234', '098f6bcd4621d373cade4e832627b4f6', 1),
 (14, 'admin', 'admin', 1),
 (15, 'Doggo', 'Doggo', 1),
-(16, 'lucas', 'lucas', 1);
+(16, 'lucas', 'lucas', 1),
+(17, 'lucas', 'ghyselen', 0);
 
 --
 -- Index pour les tables déchargées
@@ -120,19 +95,14 @@ INSERT INTO `users` (`id`, `login`, `password`, `admin`) VALUES
 -- Index pour la table `boats`
 --
 ALTER TABLE `boats`
-  ADD PRIMARY KEY (`_ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `pins`
 --
 ALTER TABLE `pins`
-  ADD PRIMARY KEY (`_ID`);
-
---
--- Index pour la table `traces`
---
-ALTER TABLE `traces`
-  ADD PRIMARY KEY (`_ID`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idBoat` (`idBoat`);
 
 --
 -- Index pour la table `users`
@@ -148,25 +118,29 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `boats`
 --
 ALTER TABLE `boats`
-  MODIFY `_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `pins`
 --
 ALTER TABLE `pins`
-  MODIFY `_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT pour la table `traces`
---
-ALTER TABLE `traces`
-  MODIFY `_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `pins`
+--
+ALTER TABLE `pins`
+  ADD CONSTRAINT `pins_ibfk_1` FOREIGN KEY (`idBoat`) REFERENCES `boats` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
