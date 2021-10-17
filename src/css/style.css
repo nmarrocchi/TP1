@@ -35,6 +35,11 @@ h4{
     padding-top: 2%;
 }
 
+a {
+    color: white;
+    font-weight: bold;
+}
+
 /*Tableau*/
 table{
     position: relative;

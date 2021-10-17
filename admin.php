@@ -13,6 +13,7 @@
             <title>Adminstration</title>
             <link rel="icon" type="image/png" href="src/img/icon.png">
             <link rel='stylesheet' type='text/css' href='src/css/style.css'>
+            <link rel='stylesheet' type='text/css' href='src/css/adminpanel.css'>
             <link rel='stylesheet' type='text/css' href='src/css/formulaire.css'>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
         </head>
@@ -27,10 +28,12 @@
                     if($admin == 1){
                         ?>
                             <div class="form">  
-                                <h4>Ajouter un utilisateur</h4>
-                                <?php
-                                    $user->insertUser();
-                                ?>
+                                <div class="insertUser">
+                                    <h4>Ajouter un utilisateur</h4>
+                                    <?php
+                                        $user->insertUser();
+                                    ?>
+                                </div>
                             </div>
                         <?php
                         $user->selectUser();

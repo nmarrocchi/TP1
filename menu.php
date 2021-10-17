@@ -67,8 +67,7 @@
         <ul class="navbar-gauche">
             <li>
                 <a href="index.php">
-                    <i class="fa-solid fa-globe"></i>
-                    <span class="titre">Titre</span>
+                    <span class="titre">TP2 - GPS</span>
                 </a>
             </li>
         </ul>

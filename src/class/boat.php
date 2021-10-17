@@ -19,7 +19,7 @@
         }
 
         // Initialisation des variables
-        public function setBoat($idboat, $name, $color, $idPins, $latitude, $longitude, $date){
+        public function setBoatPins($idboat, $name, $color, $idPins, $latitude, $longitude, $date){
             $this->_idboat = $idboat;
             $this->_name = $name;
             $this->_color = $color;
@@ -30,7 +30,7 @@
         }
 
         // Permet de récupérer les données du bateau en BDD
-        public function setBoatID($idboat, $idPins){
+        public function setBoatPinsByID($idboat, $idPins){
             $req = "SELECT * FROM `boats`, `pins` WHERE boats.id = '".$idboat."' AND pins.id = '".$idPins."'";
             $Result = $this->_bdd->query($req);
             while($tab = $Result->fetch()){
@@ -86,25 +86,6 @@
                         ?>
                     </tbody>
                 </table>
-            <?php
-        }
-
-        // Permet d'ajouter un bateau en BDD
-        public function insertBoat(){
-            if(isset($_POST["name"])){
-                $name = $_POST['name'];
-                $color = colorBoat();
-                $this->_req = "INSERT INTO `boats`(`name`, `color`) VALUES('$name', '$color')";
-            }
-            ?>
-                <form method="post">
-                    <div class="name">
-                        <input type="text" id="name" name="name" class="login-input" placeholder="Nom du Bateau" autocomplete="off" autocapitalize="off" required></input>
-                    </div>
-                    <div class="submit-button">
-                        <input type="submit" class="button" value="Ajouter"></input>
-                    </div>
-                </form>
             <?php
         }
 

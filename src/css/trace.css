@@ -16,3 +16,12 @@
     border-color: white;
     border-radius: 10px;
 }
+
+.mapboxgl-popup-content{
+    max-width: 200px;
+    color: black;
+}
+
+.mapbox-popup-content h3{
+    text-align: center;
+}

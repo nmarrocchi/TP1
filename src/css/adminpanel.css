@@ -1,16 +1,21 @@
-*{
-   margin: 0%;
-   padding: 0%;
+.insertUser{
+   position: relative;
+   width: 50%;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 2%;
 }
 
-.User_List{
-   border: solid white 1px;
-   margin: auto;
+.input, .admin{
    text-align: center;
-   border-collapse: collapse;
 }
 
-.User_List td{
-   padding: 1vh 1vw;
-   border-top: solid white 1px;
+.submit-button{
+   text-align: right;
+}
+
+@media screen and (max-width: 800px) {
+   .insertUser{
+      width: 80%;
+   }
 }

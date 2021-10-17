@@ -27,7 +27,6 @@
                             <div id='map'></div>
                         </div>
                     </div>
-                    <script src='src/js/map.js'></script>
                     <script src='src/js/api.js'></script>
                 </body> 
             <?php

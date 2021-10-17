@@ -8,7 +8,7 @@
 
     $bdd = new PDO('mysql:host='.$host.'; dbname='.$dbname.'; charset=utf8', $login, $mdp);
 
-    $req = "SELECT pins.id, pins.longitude, pins.latitude, pins.date, boats.color FROM `boats`, `pins` WHERE pins.idBoat = boats.id";
+    $req = "SELECT pins.id, pins.idBoat, pins.longitude, pins.latitude, pins.date, boats.name, boats.color FROM `boats`, `pins` WHERE pins.idBoat = boats.id";
     $Result = $bdd->query($req);
     echo json_encode($Result->fetchAll());
 ?>

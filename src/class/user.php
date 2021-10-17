@@ -246,10 +246,12 @@
             ?>
                 <form method="post">
                     <div class="account">
-                        <label>Login : </label>
-                        <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
-                        <label>Mot de passe : </label>
-                        <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
+                        <div class="input">
+                            <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
+                        </div>
                     </div>
                     <div class="admin">
                         <label>Administrateur : </label>
