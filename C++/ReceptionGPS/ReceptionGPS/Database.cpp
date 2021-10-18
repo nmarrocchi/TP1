@@ -26,7 +26,7 @@ void Database::connectToDB()
 		exit(1);
 	}
 }
-//Insertion des infos nécessaires de la trame dans la BDD ( date, longitude, latitude )
+//Insertion des infos nécessaires de la trame dans la BDD ( longitude, latitude )
 void Database::insertInDB(double latitude, double longitude)
 {
 	QSqlQuery request;
