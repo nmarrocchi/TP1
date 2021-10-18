@@ -13,7 +13,7 @@ void Database::connectToDB()
 {
 	QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 	db.setHostName("192.168.64.204");
-	db.setDatabaseName("tp1");
+	db.setDatabaseName("Lawrence");
 	db.setUserName("admin");
 	db.setPassword("admin");
 
@@ -27,13 +27,12 @@ void Database::connectToDB()
 	}
 }
 //Insertion des infos nécessaires de la trame dans la BDD ( date, longitude, latitude )
-void Database::insertInDB(QString time, double latitude, double longitude)
+void Database::insertInDB(double latitude, double longitude)
 {
 	QSqlQuery request;
-	request.prepare("INSERT INTO `GPS` (`ID`, `heureTrame`, `Latitude`, `Longitude`) VALUES (NULL, ?, ?, ?);");
-	request.addBindValue(time);
-	request.addBindValue(latitude);
+	request.prepare("INSERT INTO `pins` (`id`, `idBoat`, `longitude`, `latitude`) VALUES (NULL, 1, ?, ?);");
 	request.addBindValue(longitude);
+	request.addBindValue(latitude);
 
 	request.exec();
 	qDebug() << "INSERTION REUSSIE";

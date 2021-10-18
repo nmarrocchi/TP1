@@ -13,7 +13,7 @@ public:
 	Database(QObject *parent = Q_NULLPTR);
 	~Database();
 	void connectToDB();
-	void insertInDB(QString time, double latitude, double longitude);
+	void insertInDB(double latitude, double longitude);
 private:
 	QSqlDatabase * db;
 };

@@ -37,13 +37,15 @@ void Trame::onSerialPortReadyRead() {
 		dataList = data.split(QLatin1Char(','), Qt::SkipEmptyParts);
 		//Si la trame est correcte on traite la trame
 		if ( dataList[0] == "$GPGGA" ) {
-			// Récuperation du temps
+			//La récupération du temps n'est plus utile car récupérer directement par une fonction SQL
+			/*// Récuperation du temps
 			QString time = dataList[1].toStdString().c_str();
 			//Changement du format de chaine de caractères à un format d'affichage de l'heure
 			QStringList ListTime = time.split(QLatin1Char('.'), Qt::SkipEmptyParts);
 			QString timeWithoutColon = ListTime[0].toStdString().c_str();
 			QTime timeWithColon = QTime::fromString(timeWithoutColon, "hhmmss");
 			QString usableTime = timeWithColon.toString("hh:mm:ss");
+			*/
 
 			//Récuperation latitude N/S
 			QString latitude = dataList[2].toUtf8();
@@ -79,8 +81,8 @@ void Trame::onSerialPortReadyRead() {
 				longitudeRes = longitudeRes * (-1);
 			}
 			//Insère en bdd les informations voulu et supprime les données des tableaux et la trame pour recevoir une nouvelle trame
-			qDebug() << usableTime << latitudeRes << longitudeRes;
-			db->insertInDB(usableTime, latitudeRes, longitudeRes);
+			qDebug() << latitudeRes << longitudeRes;
+			db->insertInDB(latitudeRes, longitudeRes);
 			data.clear();
 			dataList.clear();
 
