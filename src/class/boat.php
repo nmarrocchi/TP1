@@ -89,6 +89,64 @@
             <?php
         }
 
+        // Affiche les données (id, nom, color) du bateau
+        public function selectBoat(){
+            $this->_req = "SELECT `id`, `name`, `color` FROM `boats` WHERE 1";
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Nom</td>
+                            <td>Couleur</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            while($tab = $Result->fetch()){
+                                ?>
+                                    <tr id="<?= $tab['id'] ?>">
+                                        <td>
+                                            <div><?= $tab['id'] ?></div>
+                                        </td>
+                                        <td>
+                                            <div><?= $tab['name'] ?></div>
+                                        </td>
+                                        <td>
+                                            <div><?= $tab['color'] ?></div>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            <?php
+        }
+
+        // Permet d'ajouter un bateau en BDD
+        public function insertBoat(){
+            if(isset($_POST["name"])){
+                $name = $_POST['name'];
+                $color = $this->colorBoat();
+                $this->_req = "INSERT INTO `boats`(`name`, `color`) VALUES('$name', '$color')";
+                $this->_bdd->query($this->_req);
+                unset($_POST);
+                echo '<meta http-equiv="refresh" content="0">';
+            }
+            ?>
+                <form method="post">
+                    <div class="name">
+                        <input type="text" id="name" name="name" class="login-input" placeholder="Nom du Bateau" autocomplete="off" autocapitalize="off" required></input>
+                    </div>
+                    <div class="submit-button">
+                        <input type="submit" class="button" value="Ajouter"></input>
+                    </div>
+                </form>
+            <?php
+        }
+
         // Permet d'ajouter une coordonnee en BDD
         public function insertCoordonnee($idboat){
             $this->_req = "INSERT INTO `pins`(`idBoat`, `longitude`, `latitude`) VALUES ('$idboat', '$this->_longitude', '$this->_latitude')";

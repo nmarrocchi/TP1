@@ -1,4 +1,4 @@
-.insertUser{
+.insertUser, .insertBoat{
    position: relative;
    width: 50%;
    margin-left: auto;
@@ -6,7 +6,7 @@
    margin-bottom: 2%;
 }
 
-.input, .admin{
+.input, .admin, .name{
    text-align: center;
 }
 

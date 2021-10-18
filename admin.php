@@ -27,7 +27,9 @@
                     $admin = $user->getAdmin();
                     if($admin == 1){
                         ?>
+                        <div class="settingUser">
                             <div class="form">  
+                                <h3>Paramètre Utilisateur</h3>
                                 <div class="insertUser">
                                     <h4>Ajouter un utilisateur</h4>
                                     <?php
@@ -35,8 +37,25 @@
                                     ?>
                                 </div>
                             </div>
+                            <?php
+                                $user->selectUser();
+                            ?>
+                        </div>
+                        <div class="settingBoat">
+                            <h3>Paramètre Bateau</h3>
+                            <div class="form">  
+                                <div class="insertBoat">
+                                    <h4>Ajouter un bateau</h4>
+                                    <?php
+                                        $boat->insertBoat();
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                                $boat->selectBoat();
+                            ?>
+                        </div>
                         <?php
-                        $user->selectUser();
                     }else{
                         ?>
                             <div class="return">

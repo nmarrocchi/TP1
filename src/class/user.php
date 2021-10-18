@@ -4,7 +4,7 @@
         // - Propriétés
         private $_id;
         private $_login;
-        private $_mdp;
+        private $_password;
         private $_admin;
         private $_bdd;
         private $_req;
@@ -15,10 +15,10 @@
         }
 
         // Initialisation des variables
-        public function setUser($id, $login, $mdp, $admin){
+        public function setUser($id, $login, $password, $admin){
             $this->_id = $id;
             $this->_login = $login;
-            $this->_mdp = $mdp;
+            $this->_password = $password;
             $this->_admin = $admin;
         }
 
@@ -250,7 +250,7 @@
                             <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
                         </div>
                         <div class="input">
-                            <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
+                            <input type="text" id="password" name="password" class="form-input" placeholder="Mot de passe" required>
                         </div>
                     </div>
                     <div class="admin">
@@ -267,10 +267,11 @@
                 </form>
             <?php
             if(isset($_POST['submit'])){
-                $login = $_POST['login']; $mdp = $_POST['mdp']; $admin = $_POST['admin'];
-                $this->_req = "INSERT INTO `user`(`login`, `mdp`, `admin`) VALUES('$login', '$mdp', '$admin')";
+                $login = $_POST['login']; $password = $_POST['password']; $admin = $_POST['admin'];
+                $this->_req = "INSERT INTO `users`(`login`, `password`, `admin`) VALUES('$login', '$password', '$admin')";
                 $this->_bdd->query($this->_req);
                 unset($_POST);
+                echo '<meta http-equiv="refresh" content="0">';
             }
         }
 
