@@ -78,14 +78,14 @@ void Trame::onSerialPortReadyRead() {
 			if (dataList[5] == 'O') {
 				longitudeRes = longitudeRes * (-1);
 			}
-			//Insère en bdd les informations voulu et supprime les données des tableaux pour recevoir une nouvelle trame
+			//Insère en bdd les informations voulu et supprime les données des tableaux et la trame pour recevoir une nouvelle trame
 			qDebug() << usableTime << latitudeRes << longitudeRes;
 			db->insertInDB(usableTime, latitudeRes, longitudeRes);
 			data.clear();
 			dataList.clear();
 
 		}else {
-			//Supprime les tableaux si la trame recue est invalide pour recevoir une nouvelle trame
+			//Supprime les données des tableaux et la trame si la trame recue est invalide pour recevoir une nouvelle trame
 			data.clear();
 			dataList.clear();
 		}
