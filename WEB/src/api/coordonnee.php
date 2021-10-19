@@ -1,10 +1,15 @@
 <?php
 
     //include('../../session.php');
-    $host = "localhost";
+    /*$host = "localhost";
     $dbname = "Lawrence";
     $login = "root";
-    $mdp = "";
+    $mdp = "";*/
+
+    $host = "192.168.64.204";
+    $dbname = "Lawrence";
+    $login = "admin";
+    $mdp = "admin";
 
     $bdd = new PDO('mysql:host='.$host.'; dbname='.$dbname.'; charset=utf8', $login, $mdp);
 

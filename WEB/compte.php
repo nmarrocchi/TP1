@@ -33,9 +33,6 @@
             <div class="back">
                 <h2>Compte</h2>
                 <?php $id = $user->getID(); ?>
-                <div class="divegg">
-                    <a href="https://www.youtube.com/watch?v=Tj63xbpKnqo"><img src="src/img/egg.jfif" class="egg"></a>
-                </div>
                 <div class="form">
                     <h4>Modifier le compte</h4>
                     <?php $user->formUser($id); ?>
