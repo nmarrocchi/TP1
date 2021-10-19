@@ -8,9 +8,9 @@ Trame::Trame(Database * db, QObject *parent)
 	//Créer l'écoute au port 
 	port = new QSerialPort(this);
 	QObject::connect(port, SIGNAL(readyRead()), this, SLOT(onSerialPortReadyRead()));
-	port->setPortName("COM11");
+	port->setPortName("COM1");
 	port->open(QIODevice::ReadWrite);
-	port->setBaudRate(QSerialPort::Baud9600);
+	port->setBaudRate(QSerialPort::Baud4800);
 	port->setDataBits(QSerialPort::DataBits::Data8);
 	port->setParity(QSerialPort::Parity::NoParity);
 	port->setStopBits(QSerialPort::StopBits::OneStop);
@@ -26,15 +26,19 @@ void Trame::onSerialPortReadyRead() {
 	//Récupère les chaines de caractères et les ajoutent entre elles jusqu'a ce qu'elles soient complètes
 	QByteArray dataR = port->readAll();
 	data = data + dataR.toStdString().c_str();
-	qDebug() << data;
+	//qDebug() << data;
 
-	QRegExp regExp("\\$(.+)\\r\\n"); 
-	qDebug() << regExp.indexIn(data);
+	QRegExp regExp("\\$GPGGA(.+)(\\*)"); //\\$
+	//qDebug() << regExp.indexIn(data);
+	qDebug() << data.size();
 	//Si la trame est complète ( correspond à l'expressiçon régulière )
 	if (regExp.indexIn(data) > -1)
 	{
+		QStringList resData = regExp.capturedTexts();
+		QString resDataTemp = resData[0];
 		//Sépare la chaine de caractères en utilisant les virgules de la trame
-		dataList = data.split(QLatin1Char(','), Qt::SkipEmptyParts);
+		dataList = resDataTemp.split(QLatin1Char(','), Qt::SkipEmptyParts);
+			
 		//Si la trame est correcte on traite la trame
 		if ( dataList[0] == "$GPGGA" ) {
 			//La récupération du temps n'est plus utile car récupérer directement par une fonction SQL
@@ -81,11 +85,20 @@ void Trame::onSerialPortReadyRead() {
 				longitudeRes = longitudeRes * (-1);
 			}
 			//Insère en bdd les informations voulu et supprime les données des tableaux et la trame pour recevoir une nouvelle trame
-			qDebug() << latitudeRes << longitudeRes;
-			db->insertInDB(latitudeRes, longitudeRes);
-			data.clear();
-			dataList.clear();
+			//qDebug() << dataList;
+			// Du code sans risque.
+			try
+			{
+				db->insertInDB(latitudeRes, longitudeRes);
+				data.clear();
+				dataList.clear();
 
+				// Du code qui pourrait créer une erreur.
+			}
+			catch (int e) //On rattrape les entiers lancés (pour les entiers, une référencen'a pas de sens)
+			{
+				//On gère l'erreur
+			}
 		}else {
 			//Supprime les données des tableaux et la trame si la trame recue est invalide pour recevoir une nouvelle trame
 			data.clear();

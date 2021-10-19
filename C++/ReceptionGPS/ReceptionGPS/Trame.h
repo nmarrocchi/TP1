@@ -5,6 +5,7 @@
 #include <qdebug.h>
 #include <QRegExp>
 #include "Database.h"
+#include <windows.h>
 
 class Trame : public QObject
 {

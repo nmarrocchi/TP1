@@ -30,6 +30,7 @@ void Database::connectToDB()
 void Database::insertInDB(double latitude, double longitude)
 {
 	QSqlQuery request;
+	qDebug() << latitude << longitude;
 	request.prepare("INSERT INTO `pins` (`id`, `idBoat`, `longitude`, `latitude`) VALUES (NULL, 1, ?, ?);");
 	request.addBindValue(longitude);
 	request.addBindValue(latitude);
