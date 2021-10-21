@@ -42,7 +42,7 @@ void Trame::onSerialPortReadyRead() {
 		//Si la trame est correcte on traite la trame
 		if ( dataList[0] == "$GPGGA" ) {
 			//La récupération du temps n'est plus utile car récupérer directement par une fonction SQL
-			/*// Récuperation du temps
+			/* Récuperation du temps
 			QString time = dataList[1].toStdString().c_str();
 			//Changement du format de chaine de caractères à un format d'affichage de l'heure
 			QStringList ListTime = time.split(QLatin1Char('.'), Qt::SkipEmptyParts);
@@ -86,19 +86,10 @@ void Trame::onSerialPortReadyRead() {
 			}
 			//Insère en bdd les informations voulu et supprime les données des tableaux et la trame pour recevoir une nouvelle trame
 			//qDebug() << dataList;
-			// Du code sans risque.
-			try
-			{
-				db->insertInDB(latitudeRes, longitudeRes);
-				data.clear();
-				dataList.clear();
+			db->insertInDB(latitudeRes, longitudeRes);
+			data.clear();
+			dataList.clear();
 
-				// Du code qui pourrait créer une erreur.
-			}
-			catch (int e) //On rattrape les entiers lancés (pour les entiers, une référencen'a pas de sens)
-			{
-				//On gère l'erreur
-			}
 		}else {
 			//Supprime les données des tableaux et la trame si la trame recue est invalide pour recevoir une nouvelle trame
 			data.clear();
